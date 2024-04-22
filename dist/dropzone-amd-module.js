@@ -7904,17 +7904,17 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     _this.listeners = [];
     _this.files = []; // All files
 
-    if (typeof _this.element === "string") {
+    if (typeof _this.element === 'string') {
       _this.element = document.querySelector(_this.element);
     } // Not checking if instance of HTMLElement or Element since IE9 is extremely weird.
 
 
     if (!_this.element || _this.element.nodeType == null) {
-      throw new Error("Invalid dropzone element.");
+      throw new Error('Invalid dropzone element.');
     }
 
     if (_this.element.dropzone) {
-      throw new Error("Dropzone already attached.");
+      throw new Error('Dropzone already attached.');
     } // Now add this dropzone to the instances.
 
 
@@ -7923,7 +7923,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     _this.element.dropzone = _assertThisInitialized(_this);
     var elementOptions = (left = Dropzone.optionsForElement(_this.element)) != null ? left : {};
     _this.options = Dropzone.extend({}, src_options, elementOptions, options != null ? options : {});
-    _this.options.previewTemplate = _this.options.previewTemplate.replace(/\n*/g, ""); // If the browser failed, just call the fallback and leave
+    _this.options.previewTemplate = _this.options.previewTemplate.replace(/\n*/g, ''); // If the browser failed, just call the fallback and leave
 
     if (_this.options.forceFallback || !Dropzone.isBrowserSupported()) {
       return _possibleConstructorReturn(_this, _this.options.fallback.call(_assertThisInitialized(_this)));
@@ -7931,11 +7931,11 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
 
     if (_this.options.url == null) {
-      _this.options.url = _this.element.getAttribute("action");
+      _this.options.url = _this.element.getAttribute('action');
     }
 
     if (!_this.options.url) {
-      throw new Error("No URL provided.");
+      throw new Error('No URL provided.');
     }
 
     if (_this.options.acceptedFiles && _this.options.acceptedMimeTypes) {
@@ -7943,7 +7943,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     }
 
     if (_this.options.uploadMultiple && _this.options.chunking) {
-      throw new Error("You cannot set both: uploadMultiple and chunking.");
+      throw new Error('You cannot set both: uploadMultiple and chunking.');
     } // Backwards compatibility
 
 
@@ -7959,7 +7959,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       };
     }
 
-    if (typeof _this.options.method === "string") {
+    if (typeof _this.options.method === 'string') {
       _this.options.method = _this.options.method.toUpperCase();
     }
 
@@ -7971,7 +7971,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
     if (_this.options.previewsContainer !== false) {
       if (_this.options.previewsContainer) {
-        _this.previewsContainer = Dropzone.getElement(_this.options.previewsContainer, "previewsContainer");
+        _this.previewsContainer = Dropzone.getElement(_this.options.previewsContainer, 'previewsContainer');
       } else {
         _this.previewsContainer = _this.element;
       }
@@ -7981,7 +7981,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       if (_this.options.clickable === true) {
         _this.clickableElements = [_this.element];
       } else {
-        _this.clickableElements = Dropzone.getElements(_this.options.clickable, "clickable");
+        _this.clickableElements = Dropzone.getElements(_this.options.clickable, 'clickable');
       }
     }
 
@@ -8054,11 +8054,11 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       var _this2 = this;
 
       // In case it isn't set already
-      if (this.element.tagName === "form") {
-        this.element.setAttribute("enctype", "multipart/form-data");
+      if (this.element.tagName === 'form') {
+        this.element.setAttribute('enctype', 'multipart/form-data');
       }
 
-      if (this.element.classList.contains("dropzone") && !this.element.querySelector(".dz-message")) {
+      if (this.element.classList.contains('dropzone') && !this.element.querySelector('.dz-message')) {
         this.element.appendChild(Dropzone.createElement("<div class=\"dz-default dz-message\"><button class=\"dz-button\" type=\"button\">".concat(this.options.dictDefaultMessage, "</button></div>")));
       }
 
@@ -8068,38 +8068,38 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
             _this2.hiddenFileInput.parentNode.removeChild(_this2.hiddenFileInput);
           }
 
-          _this2.hiddenFileInput = document.createElement("input");
+          _this2.hiddenFileInput = document.createElement('input');
 
-          _this2.hiddenFileInput.setAttribute("type", "file");
+          _this2.hiddenFileInput.setAttribute('type', 'file');
 
           if (_this2.options.maxFiles === null || _this2.options.maxFiles > 1) {
-            _this2.hiddenFileInput.setAttribute("multiple", "multiple");
+            _this2.hiddenFileInput.setAttribute('multiple', 'multiple');
           }
 
-          _this2.hiddenFileInput.className = "dz-hidden-input";
+          _this2.hiddenFileInput.className = 'dz-hidden-input';
 
           if (_this2.options.acceptedFiles !== null) {
-            _this2.hiddenFileInput.setAttribute("accept", _this2.options.acceptedFiles);
+            _this2.hiddenFileInput.setAttribute('accept', _this2.options.acceptedFiles);
           }
 
           if (_this2.options.capture !== null) {
-            _this2.hiddenFileInput.setAttribute("capture", _this2.options.capture);
+            _this2.hiddenFileInput.setAttribute('capture', _this2.options.capture);
           } // Making sure that no one can "tab" into this field.
 
 
-          _this2.hiddenFileInput.setAttribute("tabindex", "-1"); // Not setting `display="none"` because some browsers don't accept clicks
+          _this2.hiddenFileInput.setAttribute('tabindex', '-1'); // Not setting `display="none"` because some browsers don't accept clicks
           // on elements that aren't displayed.
 
 
-          _this2.hiddenFileInput.style.visibility = "hidden";
-          _this2.hiddenFileInput.style.position = "absolute";
-          _this2.hiddenFileInput.style.top = "0";
-          _this2.hiddenFileInput.style.left = "0";
-          _this2.hiddenFileInput.style.height = "0";
-          _this2.hiddenFileInput.style.width = "0";
-          Dropzone.getElement(_this2.options.hiddenInputContainer, "hiddenInputContainer").appendChild(_this2.hiddenFileInput);
+          _this2.hiddenFileInput.style.visibility = 'hidden';
+          _this2.hiddenFileInput.style.position = 'absolute';
+          _this2.hiddenFileInput.style.top = '0';
+          _this2.hiddenFileInput.style.left = '0';
+          _this2.hiddenFileInput.style.height = '0';
+          _this2.hiddenFileInput.style.width = '0';
+          Dropzone.getElement(_this2.options.hiddenInputContainer, 'hiddenInputContainer').appendChild(_this2.hiddenFileInput);
 
-          _this2.hiddenFileInput.addEventListener("change", function () {
+          _this2.hiddenFileInput.addEventListener('change', function () {
             var files = _this2.hiddenFileInput.files;
 
             if (files.length) {
@@ -8119,7 +8119,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
               }
             }
 
-            _this2.emit("addedfiles", files);
+            _this2.emit('addedfiles', files);
 
             setupHiddenFileInput();
           });
@@ -8146,21 +8146,21 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         _iterator2.f();
       }
 
-      this.on("uploadprogress", function () {
+      this.on('uploadprogress', function () {
         return _this2.updateTotalUploadProgress();
       });
-      this.on("removedfile", function () {
+      this.on('removedfile', function () {
         return _this2.updateTotalUploadProgress();
       });
-      this.on("canceled", function (file) {
-        return _this2.emit("complete", file);
+      this.on('canceled', function (file) {
+        return _this2.emit('complete', file);
       }); // Emit a `queuecomplete` event if all files finished uploading.
 
-      this.on("complete", function (file) {
+      this.on('complete', function (file) {
         if (_this2.getAddedFiles().length === 0 && _this2.getUploadingFiles().length === 0 && _this2.getQueuedFiles().length === 0) {
           // This needs to be deferred so that `queuecomplete` really triggers after `complete`
           return setTimeout(function () {
-            return _this2.emit("queuecomplete");
+            return _this2.emit('queuecomplete');
           }, 0);
         }
       });
@@ -8171,7 +8171,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
           // IE, we need to iterate like this instead of
           // using e.dataTransfer.types.some()
           for (var i = 0; i < e.dataTransfer.types.length; i++) {
-            if (e.dataTransfer.types[i] === "Files") return true;
+            if (e.dataTransfer.types[i] === 'Files') return true;
           }
         }
 
@@ -8197,11 +8197,11 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         element: this.element,
         events: {
           dragstart: function dragstart(e) {
-            return _this2.emit("dragstart", e);
+            return _this2.emit('dragstart', e);
           },
           dragenter: function dragenter(e) {
             noPropagation(e);
-            return _this2.emit("dragenter", e);
+            return _this2.emit('dragenter', e);
           },
           dragover: function dragover(e) {
             // Makes it possible to drag files from chrome's download bar
@@ -8213,19 +8213,19 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
               efct = e.dataTransfer.effectAllowed;
             } catch (error) {}
 
-            e.dataTransfer.dropEffect = "move" === efct || "linkMove" === efct ? "move" : "copy";
+            e.dataTransfer.dropEffect = 'move' === efct || 'linkMove' === efct ? 'move' : 'copy';
             noPropagation(e);
-            return _this2.emit("dragover", e);
+            return _this2.emit('dragover', e);
           },
           dragleave: function dragleave(e) {
-            return _this2.emit("dragleave", e);
+            return _this2.emit('dragleave', e);
           },
           drop: function drop(e) {
             noPropagation(e);
             return _this2.drop(e);
           },
           dragend: function dragend(e) {
-            return _this2.emit("dragend", e);
+            return _this2.emit('dragend', e);
           }
         } // This is disabled right now, because the browsers don't implement it properly.
         // "paste": (e) =>
@@ -8239,7 +8239,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
           events: {
             click: function click(evt) {
               // Only the actual dropzone or the message element should trigger file selection
-              if (clickableElement !== _this2.element || evt.target === _this2.element || Dropzone.elementInside(evt.target, _this2.element.querySelector(".dz-message"))) {
+              if (clickableElement !== _this2.element || evt.target === _this2.element || Dropzone.elementInside(evt.target, _this2.element.querySelector('.dz-message'))) {
                 _this2.hiddenFileInput.click(); // Forward the click
 
               }
@@ -8257,7 +8257,6 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     key: "destroy",
     value: function destroy() {
       this.disable();
-      this.removeAllFiles(true);
 
       if (this.hiddenFileInput != null ? this.hiddenFileInput.parentNode : undefined) {
         this.hiddenFileInput.parentNode.removeChild(this.hiddenFileInput);
@@ -8296,17 +8295,17 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         totalUploadProgress = 100;
       }
 
-      return this.emit("totaluploadprogress", totalUploadProgress, totalBytes, totalBytesSent);
+      return this.emit('totaluploadprogress', totalUploadProgress, totalBytes, totalBytesSent);
     } // @options.paramName can be a function taking one parameter rather than a string.
     // A parameter name for a file is obtained simply by calling this with an index number.
 
   }, {
     key: "_getParamName",
     value: function _getParamName(n) {
-      if (typeof this.options.paramName === "function") {
+      if (typeof this.options.paramName === 'function') {
         return this.options.paramName(n);
       } else {
-        return "".concat(this.options.paramName).concat(this.options.uploadMultiple ? "[".concat(n, "]") : "");
+        return "".concat(this.options.paramName).concat(this.options.uploadMultiple ? "[".concat(n, "]") : '');
       }
     } // If @options.renameFile is a function,
     // the function will be used to rename the file.name before appending it to the formData
@@ -8314,7 +8313,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
   }, {
     key: "_renameFile",
     value: function _renameFile(file) {
-      if (typeof this.options.renameFile !== "function") {
+      if (typeof this.options.renameFile !== 'function') {
         return file.name;
       }
 
@@ -8342,13 +8341,13 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       fieldsString += "<input type=\"file\" name=\"".concat(this._getParamName(0), "\" ").concat(this.options.uploadMultiple ? 'multiple="multiple"' : undefined, " /><input type=\"submit\" value=\"Upload!\"></div>");
       var fields = Dropzone.createElement(fieldsString);
 
-      if (this.element.tagName !== "FORM") {
+      if (this.element.tagName !== 'FORM') {
         form = Dropzone.createElement("<form action=\"".concat(this.options.url, "\" enctype=\"multipart/form-data\" method=\"").concat(this.options.method, "\"></form>"));
         form.appendChild(fields);
       } else {
         // Make sure that the enctype and method attributes are set properly
-        this.element.setAttribute("enctype", "multipart/form-data");
-        this.element.setAttribute("method", this.options.method);
+        this.element.setAttribute('enctype', 'multipart/form-data');
+        this.element.setAttribute('method', this.options.method);
       }
 
       return form != null ? form : fields;
@@ -8378,7 +8377,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         }
       };
 
-      for (var _i = 0, _arr = ["div", "form"]; _i < _arr.length; _i++) {
+      for (var _i = 0, _arr = ['div', 'form']; _i < _arr.length; _i++) {
         var tagName = _arr[_i];
         var fallback;
 
@@ -8428,7 +8427,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       var _this3 = this;
 
       this.clickableElements.forEach(function (element) {
-        return element.classList.remove("dz-clickable");
+        return element.classList.remove('dz-clickable');
       });
       this.removeEventListeners();
       this.disabled = true;
@@ -8441,7 +8440,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     value: function enable() {
       delete this.disabled;
       this.clickableElements.forEach(function (element) {
-        return element.classList.add("dz-clickable");
+        return element.classList.add('dz-clickable');
       });
       return this.setupEventListeners();
     } // Returns a nicely formatted filesize
@@ -8450,10 +8449,10 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     key: "filesize",
     value: function filesize(size) {
       var selectedSize = 0;
-      var selectedUnit = "b";
+      var selectedUnit = 'b';
 
       if (size > 0) {
-        var units = ["tb", "gb", "mb", "kb", "b"];
+        var units = ['tb', 'gb', 'mb', 'kb', 'b'];
 
         for (var i = 0; i < units.length; i++) {
           var unit = units[i];
@@ -8477,12 +8476,12 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     value: function _updateMaxFilesReachedClass() {
       if (this.options.maxFiles != null && this.getAcceptedFiles().length >= this.options.maxFiles) {
         if (this.getAcceptedFiles().length === this.options.maxFiles) {
-          this.emit("maxfilesreached", this.files);
+          this.emit('maxfilesreached', this.files);
         }
 
-        return this.element.classList.add("dz-max-files-reached");
+        return this.element.classList.add('dz-max-files-reached');
       } else {
-        return this.element.classList.remove("dz-max-files-reached");
+        return this.element.classList.remove('dz-max-files-reached');
       }
     }
   }, {
@@ -8492,7 +8491,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         return;
       }
 
-      this.emit("drop", e); // Convert the FileList to an Array
+      this.emit('drop', e); // Convert the FileList to an Array
       // This is necessary for IE11
 
       var files = [];
@@ -8513,7 +8512,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         }
       }
 
-      this.emit("addedfiles", files);
+      this.emit('addedfiles', files);
     }
   }, {
     key: "paste",
@@ -8524,7 +8523,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         return;
       }
 
-      this.emit("paste", e);
+      this.emit('paste', e);
       var items = e.clipboardData.items;
 
       if (items.length) {
@@ -8576,7 +8575,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
                 result.push(undefined);
               }
             } else if (item.getAsFile != null) {
-              if (item.kind == null || item.kind === "file") {
+              if (item.kind == null || item.kind === 'file') {
                 result.push(_this4.addFile(item.getAsFile()));
               } else {
                 result.push(undefined);
@@ -8603,7 +8602,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       var dirReader = directory.createReader();
 
       var errorHandler = function errorHandler(error) {
-        return __guardMethod__(console, "log", function (o) {
+        return __guardMethod__(console, 'log', function (o) {
           return o.log(error);
         });
       };
@@ -8620,7 +8619,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
                 if (entry.isFile) {
                   entry.file(function (file) {
-                    if (_this5.options.ignoreHiddenFiles && file.name.substring(0, 1) === ".") {
+                    if (_this5.options.ignoreHiddenFiles && file.name.substring(0, 1) === '.') {
                       return;
                     }
 
@@ -8659,12 +8658,12 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     key: "accept",
     value: function accept(file, done) {
       if (this.options.maxFilesize && file.size > this.options.maxFilesize * 1024 * 1024) {
-        done(this.options.dictFileTooBig.replace("{{filesize}}", Math.round(file.size / 1024 / 10.24) / 100).replace("{{maxFilesize}}", this.options.maxFilesize));
+        done(this.options.dictFileTooBig.replace('{{filesize}}', Math.round(file.size / 1024 / 10.24) / 100).replace('{{maxFilesize}}', this.options.maxFilesize));
       } else if (!Dropzone.isValidFile(file, this.options.acceptedFiles)) {
         done(this.options.dictInvalidFileType);
       } else if (this.options.maxFiles != null && this.getAcceptedFiles().length >= this.options.maxFiles) {
-        done(this.options.dictMaxFilesExceeded.replace("{{maxFiles}}", this.options.maxFiles));
-        this.emit("maxfilesexceeded", file);
+        done(this.options.dictMaxFilesExceeded.replace('{{maxFiles}}', this.options.maxFiles));
+        this.emit('maxfilesexceeded', file);
       } else {
         this.options.accept.call(this, file, done);
       }
@@ -8688,7 +8687,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       };
       this.files.push(file);
       file.status = Dropzone.ADDED;
-      this.emit("addedfile", file);
+      this.emit('addedfile', file);
 
       this._enqueueThumbnail(file);
 
@@ -8774,7 +8773,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       var file = this._thumbnailQueue.shift();
 
       return this.createThumbnail(file, this.options.thumbnailWidth, this.options.thumbnailHeight, this.options.thumbnailMethod, true, function (dataUrl) {
-        _this9.emit("thumbnail", file, dataUrl);
+        _this9.emit('thumbnail', file, dataUrl);
 
         _this9._processingThumbnail = false;
         return _this9._processThumbnailQueue();
@@ -8789,10 +8788,10 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       }
 
       this.files = without(this.files, file);
-      this.emit("removedfile", file);
+      this.emit('removedfile', file);
 
       if (this.files.length === 0) {
-        return this.emit("reset");
+        return this.emit('reset');
       }
     } // Removes all files that aren't currently processed from the list
 
@@ -8844,7 +8843,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
           var resizedDataURL = canvas.toDataURL(resizeMimeType, _this10.options.resizeQuality);
 
-          if (resizeMimeType === "image/jpeg" || resizeMimeType === "image/jpg") {
+          if (resizeMimeType === 'image/jpeg' || resizeMimeType === 'image/jpg') {
             // Now add the original EXIF information
             resizedDataURL = ExifRestore.restore(file.dataURL, resizedDataURL);
           }
@@ -8863,7 +8862,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       fileReader.onload = function () {
         file.dataURL = fileReader.result; // Don't bother creating a thumbnail for SVG images since they're vector
 
-        if (file.type === "image/svg+xml") {
+        if (file.type === 'image/svg+xml') {
           if (callback != null) {
             callback(fileReader.result);
           }
@@ -8888,15 +8887,15 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       var _this12 = this;
 
       var resizeThumbnail = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-      this.emit("addedfile", mockFile);
-      this.emit("complete", mockFile);
+      this.emit('addedfile', mockFile);
+      this.emit('complete', mockFile);
 
       if (!resizeThumbnail) {
-        this.emit("thumbnail", mockFile, imageUrl);
+        this.emit('thumbnail', mockFile, imageUrl);
         if (callback) callback();
       } else {
         var onDone = function onDone(thumbnail) {
-          _this12.emit("thumbnail", mockFile, thumbnail);
+          _this12.emit('thumbnail', mockFile, thumbnail);
 
           if (callback) callback();
         };
@@ -8912,24 +8911,24 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
       // Not using `new Image` here because of a bug in latest Chrome versions.
       // See https://github.com/enyo/dropzone/pull/226
-      var img = document.createElement("img");
+      var img = document.createElement('img');
 
       if (crossOrigin) {
         img.crossOrigin = crossOrigin;
       } // fixOrientation is not needed anymore with browsers handling imageOrientation
 
 
-      fixOrientation = getComputedStyle(document.body)["imageOrientation"] == "from-image" ? false : fixOrientation;
+      fixOrientation = getComputedStyle(document.body)['imageOrientation'] == 'from-image' ? false : fixOrientation;
 
       img.onload = function () {
         var loadExif = function loadExif(callback) {
           return callback(1);
         };
 
-        if (typeof EXIF !== "undefined" && EXIF !== null && fixOrientation) {
+        if (typeof EXIF !== 'undefined' && EXIF !== null && fixOrientation) {
           loadExif = function loadExif(callback) {
             return EXIF.getData(img, function () {
-              return callback(EXIF.getTag(this, "Orientation"));
+              return callback(EXIF.getTag(this, 'Orientation'));
             });
           };
         }
@@ -8940,8 +8939,8 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
           var resizeInfo = _this13.options.resize.call(_this13, file, width, height, resizeMethod);
 
-          var canvas = document.createElement("canvas");
-          var ctx = canvas.getContext("2d");
+          var canvas = document.createElement('canvas');
+          var ctx = canvas.getContext('2d');
           canvas.width = resizeInfo.trgWidth;
           canvas.height = resizeInfo.trgHeight;
 
@@ -8997,7 +8996,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
 
           drawImageIOSFix(ctx, img, resizeInfo.srcX != null ? resizeInfo.srcX : 0, resizeInfo.srcY != null ? resizeInfo.srcY : 0, resizeInfo.srcWidth, resizeInfo.srcHeight, resizeInfo.trgX != null ? resizeInfo.trgX : 0, resizeInfo.trgY != null ? resizeInfo.trgY : 0, resizeInfo.trgWidth, resizeInfo.trgHeight);
-          var thumbnail = canvas.toDataURL("image/png");
+          var thumbnail = canvas.toDataURL('image/png');
 
           if (callback != null) {
             return callback(thumbnail, canvas);
@@ -9063,7 +9062,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
           file.processing = true; // Backwards compatibility
 
           file.status = Dropzone.UPLOADING;
-          this.emit("processing", file);
+          this.emit('processing', file);
         }
       } catch (err) {
         _iterator10.e(err);
@@ -9072,7 +9071,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       }
 
       if (this.options.uploadMultiple) {
-        this.emit("processingmultiple", files);
+        this.emit('processingmultiple', files);
       }
 
       return this.uploadFiles(files);
@@ -9111,7 +9110,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
           _iterator11.f();
         }
 
-        if (typeof file.xhr !== "undefined") {
+        if (typeof file.xhr !== 'undefined') {
           file.xhr.abort();
         }
 
@@ -9121,7 +9120,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         try {
           for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
             var _groupedFile = _step12.value;
-            this.emit("canceled", _groupedFile);
+            this.emit('canceled', _groupedFile);
           }
         } catch (err) {
           _iterator12.e(err);
@@ -9130,14 +9129,14 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         }
 
         if (this.options.uploadMultiple) {
-          this.emit("canceledmultiple", groupedFiles);
+          this.emit('canceledmultiple', groupedFiles);
         }
       } else if (file.status === Dropzone.ADDED || file.status === Dropzone.QUEUED) {
         file.status = Dropzone.CANCELED;
-        this.emit("canceled", file);
+        this.emit('canceled', file);
 
         if (this.options.uploadMultiple) {
-          this.emit("canceledmultiple", [file]);
+          this.emit('canceledmultiple', [file]);
         }
       }
 
@@ -9148,7 +9147,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
   }, {
     key: "resolveOption",
     value: function resolveOption(option) {
-      if (typeof option === "function") {
+      if (typeof option === 'function') {
         for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
           args[_key - 1] = arguments[_key];
         }
@@ -9333,9 +9332,9 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       };
 
       var headers = {
-        Accept: "application/json",
-        "Cache-Control": "no-cache",
-        "X-Requested-With": "XMLHttpRequest"
+        Accept: 'application/json',
+        'Cache-Control': 'no-cache',
+        'X-Requested-With': 'XMLHttpRequest'
       };
 
       if (this.options.headers) {
@@ -9355,7 +9354,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       if (this.options.params) {
         var additionalParams = this.options.params;
 
-        if (typeof additionalParams === "function") {
+        if (typeof additionalParams === 'function') {
           additionalParams = additionalParams.call(this, files, xhr, files[0].upload.chunked ? this._getChunk(files[0], xhr) : null);
         }
 
@@ -9382,7 +9381,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       try {
         for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
           var _file = _step14.value;
-          this.emit("sending", _file, xhr, formData);
+          this.emit('sending', _file, xhr, formData);
         }
       } catch (err) {
         _iterator14.e(err);
@@ -9391,7 +9390,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       }
 
       if (this.options.uploadMultiple) {
-        this.emit("sendingmultiple", files, xhr, formData);
+        this.emit('sendingmultiple', files, xhr, formData);
       }
 
       this._addFormElementData(formData); // Finally add the files
@@ -9434,20 +9433,20 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     key: "_addFormElementData",
     value: function _addFormElementData(formData) {
       // Take care of other input elements
-      if (this.element.tagName === "FORM") {
-        var _iterator15 = dropzone_createForOfIteratorHelper(this.element.querySelectorAll("input, textarea, select, button"), true),
+      if (this.element.tagName === 'FORM') {
+        var _iterator15 = dropzone_createForOfIteratorHelper(this.element.querySelectorAll('input, textarea, select, button'), true),
             _step15;
 
         try {
           for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
             var input = _step15.value;
-            var inputName = input.getAttribute("name");
-            var inputType = input.getAttribute("type");
+            var inputName = input.getAttribute('name');
+            var inputType = input.getAttribute('type');
             if (inputType) inputType = inputType.toLowerCase(); // If the input doesn't have a name, we can't use it.
 
-            if (typeof inputName === "undefined" || inputName === null) continue;
+            if (typeof inputName === 'undefined' || inputName === null) continue;
 
-            if (input.tagName === "SELECT" && input.hasAttribute("multiple")) {
+            if (input.tagName === 'SELECT' && input.hasAttribute('multiple')) {
               // Possibly multiple values
               var _iterator16 = dropzone_createForOfIteratorHelper(input.options, true),
                   _step16;
@@ -9465,7 +9464,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
               } finally {
                 _iterator16.f();
               }
-            } else if (!inputType || inputType !== "checkbox" && inputType !== "radio" || input.checked) {
+            } else if (!inputType || inputType !== 'checkbox' && inputType !== 'radio' || input.checked) {
               formData.append(inputName, input.value);
             }
           }
@@ -9507,7 +9506,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
               file.upload.bytesSent = file.upload.total;
             }
 
-            this.emit("uploadprogress", file, file.upload.progress, file.upload.bytesSent);
+            this.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
           }
         } catch (err) {
           _iterator17.e(err);
@@ -9539,7 +9538,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         _file2.upload.bytesSent = 0;
 
         for (var i = 0; i < _file2.upload.totalChunkCount; i++) {
-          if (_file2.upload.chunks[i] && typeof _file2.upload.chunks[i].progress !== "undefined") {
+          if (_file2.upload.chunks[i] && typeof _file2.upload.chunks[i].progress !== 'undefined') {
             _file2.upload.progress += _file2.upload.chunks[i].progress;
             _file2.upload.total += _file2.upload.chunks[i].total;
             _file2.upload.bytesSent += _file2.upload.chunks[i].bytesSent;
@@ -9549,7 +9548,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
 
         _file2.upload.progress = _file2.upload.progress / _file2.upload.totalChunkCount;
-        this.emit("uploadprogress", _file2, _file2.upload.progress, _file2.upload.bytesSent);
+        this.emit('uploadprogress', _file2, _file2.upload.progress, _file2.upload.bytesSent);
       }
     }
   }, {
@@ -9565,15 +9564,15 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         return;
       }
 
-      if (xhr.responseType !== "arraybuffer" && xhr.responseType !== "blob") {
+      if (xhr.responseType !== 'arraybuffer' && xhr.responseType !== 'blob') {
         response = xhr.responseText;
 
-        if (xhr.getResponseHeader("content-type") && ~xhr.getResponseHeader("content-type").indexOf("application/json")) {
+        if (xhr.getResponseHeader('content-type') && ~xhr.getResponseHeader('content-type').indexOf('application/json')) {
           try {
             response = JSON.parse(response);
           } catch (error) {
             e = error;
-            response = "Invalid JSON response from server.";
+            response = 'Invalid JSON response from server.';
           }
         }
       }
@@ -9605,17 +9604,17 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
           return;
         } else {
-          console.warn("Retried this chunk too often. Giving up.");
+          console.warn('Retried this chunk too often. Giving up.');
         }
       }
 
-      this._errorProcessing(files, response || this.options.dictResponseError.replace("{{statusCode}}", xhr.status), xhr);
+      this._errorProcessing(files, response || this.options.dictResponseError.replace('{{statusCode}}', xhr.status), xhr);
     }
   }, {
     key: "submitRequest",
     value: function submitRequest(xhr, formData, files) {
       if (xhr.readyState != 1) {
-        console.warn("Cannot send this request because the XMLHttpRequest.readyState is not OPENED.");
+        console.warn('Cannot send this request because the XMLHttpRequest.readyState is not OPENED.');
         return;
       }
 
@@ -9633,8 +9632,8 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
           var file = _step18.value;
           file.status = Dropzone.SUCCESS;
-          this.emit("success", file, responseText, e);
-          this.emit("complete", file);
+          this.emit('success', file, responseText, e);
+          this.emit('complete', file);
         }
       } catch (err) {
         _iterator18.e(err);
@@ -9643,8 +9642,8 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       }
 
       if (this.options.uploadMultiple) {
-        this.emit("successmultiple", files, responseText, e);
-        this.emit("completemultiple", files);
+        this.emit('successmultiple', files, responseText, e);
+        this.emit('completemultiple', files);
       }
 
       if (this.options.autoProcessQueue) {
@@ -9663,8 +9662,8 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
           var file = _step19.value;
           file.status = Dropzone.ERROR;
-          this.emit("error", file, message, xhr);
-          this.emit("complete", file);
+          this.emit('error', file, message, xhr);
+          this.emit('complete', file);
         }
       } catch (err) {
         _iterator19.e(err);
@@ -9673,8 +9672,8 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       }
 
       if (this.options.uploadMultiple) {
-        this.emit("errormultiple", files, message, xhr);
-        this.emit("completemultiple", files);
+        this.emit('errormultiple', files, message, xhr);
+        this.emit('completemultiple', files);
       }
 
       if (this.options.autoProcessQueue) {
@@ -9692,7 +9691,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         dropzone.on("dragEnter", function() { });
         */
 
-      this.prototype.events = ["drop", "dragstart", "dragend", "dragenter", "dragover", "dragleave", "addedfile", "addedfiles", "removedfile", "thumbnail", "error", "errormultiple", "processing", "processingmultiple", "uploadprogress", "totaluploadprogress", "sending", "sendingmultiple", "success", "successmultiple", "canceled", "canceledmultiple", "complete", "completemultiple", "reset", "maxfilesexceeded", "maxfilesreached", "queuecomplete"];
+      this.prototype.events = ['drop', 'dragstart', 'dragend', 'dragenter', 'dragover', 'dragleave', 'addedfile', 'addedfiles', 'removedfile', 'thumbnail', 'error', 'errormultiple', 'processing', 'processingmultiple', 'uploadprogress', 'totaluploadprogress', 'sending', 'sendingmultiple', 'success', 'successmultiple', 'canceled', 'canceledmultiple', 'complete', 'completemultiple', 'reset', 'maxfilesexceeded', 'maxfilesreached', 'queuecomplete'];
       this.prototype._thumbnailQueue = [];
       this.prototype._processingThumbnail = false;
     } // global utility
@@ -9718,9 +9717,9 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
   }, {
     key: "uuidv4",
     value: function uuidv4() {
-      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16 | 0,
-            v = c === "x" ? r : r & 0x3 | 0x8;
+            v = c === 'x' ? r : r & 0x3 | 0x8;
         return v.toString(16);
       });
     }
@@ -9731,7 +9730,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
 
 Dropzone.initClass();
-Dropzone.version = "dev"; // This is a map of options for your different dropzones. Add configurations
+Dropzone.version = 'dev'; // This is a map of options for your different dropzones. Add configurations
 // to this object for your different dropzone elemens.
 //
 // Example:
@@ -9750,8 +9749,8 @@ Dropzone.options = {}; // Returns the options for an element or undefined if non
 
 Dropzone.optionsForElement = function (element) {
   // Get the `Dropzone.options.elementId` for this element if it exists
-  if (element.getAttribute("id")) {
-    return Dropzone.options[camelize(element.getAttribute("id"))];
+  if (element.getAttribute('id')) {
+    return Dropzone.options[camelize(element.getAttribute('id'))];
   } else {
     return undefined;
   }
@@ -9761,7 +9760,7 @@ Dropzone.optionsForElement = function (element) {
 Dropzone.instances = []; // Returns the dropzone for given element if any
 
 Dropzone.forElement = function (element) {
-  if (typeof element === "string") {
+  if (typeof element === 'string') {
     element = document.querySelector(element);
   }
 
@@ -9779,7 +9778,7 @@ Dropzone.discover = function () {
   var dropzones;
 
   if (document.querySelectorAll) {
-    dropzones = document.querySelectorAll(".dropzone");
+    dropzones = document.querySelectorAll('.dropzone');
   } else {
     dropzones = []; // IE :(
 
@@ -9810,8 +9809,8 @@ Dropzone.discover = function () {
       }();
     };
 
-    checkElements(document.getElementsByTagName("div"));
-    checkElements(document.getElementsByTagName("form"));
+    checkElements(document.getElementsByTagName('div'));
+    checkElements(document.getElementsByTagName('form'));
   }
 
   return function () {
@@ -9858,7 +9857,7 @@ Dropzone.isBrowserSupported = function () {
   var capableBrowser = true;
 
   if (window.File && window.FileReader && window.FileList && window.Blob && window.FormData && document.querySelector) {
-    if (!("classList" in document.createElement("a"))) {
+    if (!('classList' in document.createElement('a'))) {
       capableBrowser = false;
     } else {
       if (Dropzone.blacklistedBrowsers !== undefined) {
@@ -9896,9 +9895,9 @@ Dropzone.isBrowserSupported = function () {
 Dropzone.dataURItoBlob = function (dataURI) {
   // convert base64 to raw binary data held in a string
   // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-  var byteString = atob(dataURI.split(",")[1]); // separate out the mime component
+  var byteString = atob(dataURI.split(',')[1]); // separate out the mime component
 
-  var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0]; // write the bytes of the string to an ArrayBuffer
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]; // write the bytes of the string to an ArrayBuffer
 
   var ab = new ArrayBuffer(byteString.length);
   var ia = new Uint8Array(ab);
@@ -9931,7 +9930,7 @@ var camelize = function camelize(str) {
 
 
 Dropzone.createElement = function (string) {
-  var div = document.createElement("div");
+  var div = document.createElement('div');
   div.innerHTML = string;
   return div.childNodes[0];
 }; // Tests if given element is inside (or simply is) the container
@@ -9955,7 +9954,7 @@ Dropzone.elementInside = function (element, container) {
 Dropzone.getElement = function (el, name) {
   var element;
 
-  if (typeof el === "string") {
+  if (typeof el === 'string') {
     element = document.querySelector(el);
   } else if (el.nodeType != null) {
     element = el;
@@ -9991,7 +9990,7 @@ Dropzone.getElements = function (els, name) {
     } catch (e) {
       elements = null;
     }
-  } else if (typeof els === "string") {
+  } else if (typeof els === 'string') {
     elements = [];
 
     var _iterator24 = dropzone_createForOfIteratorHelper(document.querySelectorAll(els), true),
@@ -10039,9 +10038,9 @@ Dropzone.isValidFile = function (file, acceptedFiles) {
   } // If there are no accepted mime types, it's OK
 
 
-  acceptedFiles = acceptedFiles.split(",");
+  acceptedFiles = acceptedFiles.split(',');
   var mimeType = file.type;
-  var baseMimeType = mimeType.replace(/\/.*$/, "");
+  var baseMimeType = mimeType.replace(/\/.*$/, '');
 
   var _iterator25 = dropzone_createForOfIteratorHelper(acceptedFiles, true),
       _step25;
@@ -10051,13 +10050,13 @@ Dropzone.isValidFile = function (file, acceptedFiles) {
       var validType = _step25.value;
       validType = validType.trim();
 
-      if (validType.charAt(0) === ".") {
+      if (validType.charAt(0) === '.') {
         if (file.name.toLowerCase().indexOf(validType.toLowerCase(), file.name.length - validType.length) !== -1) {
           return true;
         }
       } else if (/\/\*$/.test(validType)) {
         // This is something like a image/* mime type
-        if (baseMimeType === validType.replace(/\/.*$/, "")) {
+        if (baseMimeType === validType.replace(/\/.*$/, '')) {
           return true;
         }
       } else {
@@ -10076,7 +10075,7 @@ Dropzone.isValidFile = function (file, acceptedFiles) {
 }; // Augment jQuery
 
 
-if (typeof jQuery !== "undefined" && jQuery !== null) {
+if (typeof jQuery !== 'undefined' && jQuery !== null) {
   jQuery.fn.dropzone = function (options) {
     return this.each(function () {
       return new Dropzone(this, options);
@@ -10085,17 +10084,17 @@ if (typeof jQuery !== "undefined" && jQuery !== null) {
 } // Dropzone file status codes
 
 
-Dropzone.ADDED = "added";
-Dropzone.QUEUED = "queued"; // For backwards compatibility. Now, if a file is accepted, it's either queued
+Dropzone.ADDED = 'added';
+Dropzone.QUEUED = 'queued'; // For backwards compatibility. Now, if a file is accepted, it's either queued
 // or uploading.
 
 Dropzone.ACCEPTED = Dropzone.QUEUED;
-Dropzone.UPLOADING = "uploading";
+Dropzone.UPLOADING = 'uploading';
 Dropzone.PROCESSING = Dropzone.UPLOADING; // alias
 
-Dropzone.CANCELED = "canceled";
-Dropzone.ERROR = "error";
-Dropzone.SUCCESS = "success";
+Dropzone.CANCELED = 'canceled';
+Dropzone.ERROR = 'error';
+Dropzone.SUCCESS = 'success';
 /*
 
  Bugfix for iOS 6 and 7
@@ -10110,10 +10109,10 @@ Dropzone.SUCCESS = "success";
 var detectVerticalSquash = function detectVerticalSquash(img) {
   var iw = img.naturalWidth;
   var ih = img.naturalHeight;
-  var canvas = document.createElement("canvas");
+  var canvas = document.createElement('canvas');
   canvas.width = 1;
   canvas.height = ih;
-  var ctx = canvas.getContext("2d");
+  var ctx = canvas.getContext('2d');
   ctx.drawImage(img, 0, 0);
 
   var _ctx$getImageData = ctx.getImageData(1, 0, 1, ih),
@@ -10163,19 +10162,19 @@ var ExifRestore = /*#__PURE__*/function () {
   dropzone_createClass(ExifRestore, null, [{
     key: "initClass",
     value: function initClass() {
-      this.KEY_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+      this.KEY_STR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
     }
   }, {
     key: "encode64",
     value: function encode64(input) {
-      var output = "";
+      var output = '';
       var chr1 = undefined;
       var chr2 = undefined;
-      var chr3 = "";
+      var chr3 = '';
       var enc1 = undefined;
       var enc2 = undefined;
       var enc3 = undefined;
-      var enc4 = "";
+      var enc4 = '';
       var i = 0;
 
       while (true) {
@@ -10194,8 +10193,8 @@ var ExifRestore = /*#__PURE__*/function () {
         }
 
         output = output + this.KEY_STR.charAt(enc1) + this.KEY_STR.charAt(enc2) + this.KEY_STR.charAt(enc3) + this.KEY_STR.charAt(enc4);
-        chr1 = chr2 = chr3 = "";
-        enc1 = enc2 = enc3 = enc4 = "";
+        chr1 = chr2 = chr3 = '';
+        enc1 = enc2 = enc3 = enc4 = '';
 
         if (!(i < input.length)) {
           break;
@@ -10207,11 +10206,11 @@ var ExifRestore = /*#__PURE__*/function () {
   }, {
     key: "restore",
     value: function restore(origFileBase64, resizedFileBase64) {
-      if (!origFileBase64.match("data:image/jpeg;base64,")) {
+      if (!origFileBase64.match('data:image/jpeg;base64,')) {
         return resizedFileBase64;
       }
 
-      var rawImage = this.decode64(origFileBase64.replace("data:image/jpeg;base64,", ""));
+      var rawImage = this.decode64(origFileBase64.replace('data:image/jpeg;base64,', ''));
       var segments = this.slice2Segments(rawImage);
       var image = this.exifManipulation(resizedFileBase64, segments);
       return "data:image/jpeg;base64,".concat(this.encode64(image));
@@ -10245,7 +10244,7 @@ var ExifRestore = /*#__PURE__*/function () {
   }, {
     key: "insertExif",
     value: function insertExif(resizedFileBase64, exifArray) {
-      var imageData = resizedFileBase64.replace("data:image/jpeg;base64,", "");
+      var imageData = resizedFileBase64.replace('data:image/jpeg;base64,', '');
       var buf = this.decode64(imageData);
       var separatePoint = buf.indexOf(255, 3);
       var mae = buf.slice(0, separatePoint);
@@ -10288,14 +10287,14 @@ var ExifRestore = /*#__PURE__*/function () {
   }, {
     key: "decode64",
     value: function decode64(input) {
-      var output = "";
+      var output = '';
       var chr1 = undefined;
       var chr2 = undefined;
-      var chr3 = "";
+      var chr3 = '';
       var enc1 = undefined;
       var enc2 = undefined;
       var enc3 = undefined;
-      var enc4 = "";
+      var enc4 = '';
       var i = 0;
       var buf = []; // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
 
@@ -10305,7 +10304,7 @@ var ExifRestore = /*#__PURE__*/function () {
         console.warn("There were invalid base64 characters in the input text.\nValid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\nExpect errors in decoding.");
       }
 
-      input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+      input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '');
 
       while (true) {
         enc1 = this.KEY_STR.indexOf(input.charAt(i++));
@@ -10325,8 +10324,8 @@ var ExifRestore = /*#__PURE__*/function () {
           buf.push(chr3);
         }
 
-        chr1 = chr2 = chr3 = "";
-        enc1 = enc2 = enc3 = enc4 = "";
+        chr1 = chr2 = chr3 = '';
+        enc1 = enc2 = enc3 = enc4 = '';
 
         if (!(i < input.length)) {
           break;
@@ -10362,16 +10361,16 @@ var contentLoaded = function contentLoaded(win, fn) {
   var top = true;
   var doc = win.document;
   var root = doc.documentElement;
-  var add = doc.addEventListener ? "addEventListener" : "attachEvent";
-  var rem = doc.addEventListener ? "removeEventListener" : "detachEvent";
-  var pre = doc.addEventListener ? "" : "on";
+  var add = doc.addEventListener ? 'addEventListener' : 'attachEvent';
+  var rem = doc.addEventListener ? 'removeEventListener' : 'detachEvent';
+  var pre = doc.addEventListener ? '' : 'on';
 
   var init = function init(e) {
-    if (e.type === "readystatechange" && doc.readyState !== "complete") {
+    if (e.type === 'readystatechange' && doc.readyState !== 'complete') {
       return;
     }
 
-    (e.type === "load" ? win : doc)[rem](pre + e.type, init, false);
+    (e.type === 'load' ? win : doc)[rem](pre + e.type, init, false);
 
     if (!done && (done = true)) {
       return fn.call(win, e.type || e);
@@ -10380,16 +10379,16 @@ var contentLoaded = function contentLoaded(win, fn) {
 
   var poll = function poll() {
     try {
-      root.doScroll("left");
+      root.doScroll('left');
     } catch (e) {
       setTimeout(poll, 50);
       return;
     }
 
-    return init("poll");
+    return init('poll');
   };
 
-  if (doc.readyState !== "complete") {
+  if (doc.readyState !== 'complete') {
     if (doc.createEventObject && root.doScroll) {
       try {
         top = !win.frameElement;
@@ -10400,9 +10399,9 @@ var contentLoaded = function contentLoaded(win, fn) {
       }
     }
 
-    doc[add](pre + "DOMContentLoaded", init, false);
-    doc[add](pre + "readystatechange", init, false);
-    return win[add](pre + "load", init, false);
+    doc[add](pre + 'DOMContentLoaded', init, false);
+    doc[add](pre + 'readystatechange', init, false);
+    return win[add](pre + 'load', init, false);
   }
 }; // As a single function to be able to write tests.
 
@@ -10416,11 +10415,11 @@ Dropzone._autoDiscoverFunction = function () {
 contentLoaded(window, Dropzone._autoDiscoverFunction);
 
 function __guard__(value, transform) {
-  return typeof value !== "undefined" && value !== null ? transform(value) : undefined;
+  return typeof value !== 'undefined' && value !== null ? transform(value) : undefined;
 }
 
 function __guardMethod__(obj, methodName, transform) {
-  if (typeof obj !== "undefined" && obj !== null && typeof obj[methodName] === "function") {
+  if (typeof obj !== 'undefined' && obj !== null && typeof obj[methodName] === 'function') {
     return transform(obj, methodName);
   } else {
     return undefined;
